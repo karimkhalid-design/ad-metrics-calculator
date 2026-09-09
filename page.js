@@ -1,4 +1,4 @@
- "use client";
+app/page.js "use client";
 import {useMemo,useState} from "react";
 
 const n=(v)=>Number(v)||0;
