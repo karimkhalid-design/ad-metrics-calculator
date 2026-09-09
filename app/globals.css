@@ -14,3 +14,7 @@
 .forecastResults .card{min-height:112px}
 @media(max-width:900px){.forecastLayout{grid-template-columns:1fr}.forecastResults{grid-template-columns:repeat(2,1fr)}}
 @media(max-width:620px){.forecastHead{flex-direction:column}.forecastInputs,.forecastResults{grid-template-columns:1fr}.estimateBadge{white-space:normal}}
+
+.topnav{display:flex;gap:8px;margin:0 0 18px;flex-wrap:wrap}
+.topnav a{text-decoration:none;color:#aeb4be;background:#15181e;border:1px solid #2b3038;padding:10px 14px;border-radius:10px;font-size:13px}
+.topnav a:hover,.topnav a.active{color:#fff;border-color:#565d68;background:#1b1f26}

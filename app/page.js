@@ -7,9 +7,7 @@ const money=(v)=>`${v.toLocaleString("en-US",{minimumFractionDigits:2,maximumFra
 
 export default function Home(){
  const [d,setD]=useState({spend:0,impressions:0,reach:0,clicks:0,lpv:0,leads:0,purchases:0,revenue:0,profit:0});
- const [plan,setPlan]=useState({budget:0,cpa:0,aov:0,days:0});
  const set=(k,v)=>setD(x=>({...x,[k]:v}));
- const setP=(k,v)=>setPlan(x=>({...x,[k]:v}));
  const m=useMemo(()=>{
    const spend=n(d.spend), imp=n(d.impressions), reach=n(d.reach), clicks=n(d.clicks), lpv=n(d.lpv), leads=n(d.leads), purchases=n(d.purchases), rev=n(d.revenue);
    const grossProfit=rev-spend;
@@ -21,19 +19,6 @@ export default function Home(){
     profit:grossProfit, margin:rev?grossProfit/rev:0, breakEvenCPA:purchases?rev/purchases:0
    };
  },[d]);
- const forecast=useMemo(()=>{
-   const budget=n(plan.budget), cpa=n(plan.cpa), aov=n(plan.aov), days=Math.max(1,n(plan.days));
-   const purchases=cpa?budget/cpa:0;
-   const revenue=purchases*aov;
-   return {
-    purchases,
-    dailyBudget:budget/days,
-    purchasesPerDay:purchases/days,
-    revenue,
-    roas:budget?revenue/budget:0,
-    revenueAfterAds:revenue-budget
-   };
- },[plan]);
  const metric=(name,val,sub="")=><div className="card"><div className="label">{name}</div><div className="value">{val}</div>{sub&&<div className="sub">{sub}</div>}</div>;
  return <main>
   <header><div><div className="eyebrow">MEDIA BUYING TOOL</div><h1>Ad Metrics Calculator</h1><p>احسب أهم أرقام الإعلان والحملة في ثواني.</p></div><button className="reset" onClick={()=>setD({spend:1000,impressions:50000,reach:30000,clicks:1000,lpv:700,leads:100,purchases:20,revenue:3000})}>Reset</button></header>
@@ -59,28 +44,6 @@ export default function Home(){
     {metric("Profit Margin",pct(m.margin),"Profit ÷ Revenue")}
     {metric("Break-even CPA",money(m.breakEvenCPA),"Max CPA before ad spend consumes revenue")}
    </div></div>
-  </section>
-  <section className="panel forecast" dir="rtl">
-   <div className="forecastHead">
-    <div><div className="eyebrow">EXPECTED RESULTS</div><h2>توقع نتائج الإعلان</h2><p>ادخل ميزانية الإعلان والـ CPA المستهدف، والأداة تحسب لك النتائج المتوقعة تقريبياً.</p></div>
-    <div className="estimateBadge">تقديرات وليست ضماناً للنتائج</div>
-   </div>
-   <div className="forecastLayout">
-    <div className="forecastInputs">
-     <label>إجمالي ميزانية الإعلان (EGP)<input type="number" min="0" value={plan.budget} onChange={e=>setP("budget",e.target.value)}/></label>
-     <label>Target CPA (EGP)<input type="number" min="0" value={plan.cpa} onChange={e=>setP("cpa",e.target.value)}/></label>
-     <label>متوسط قيمة الطلب AOV (اختياري)<input type="number" min="0" value={plan.aov} onChange={e=>setP("aov",e.target.value)}/></label>
-     <label>مدة الحملة بالأيام<input type="number" min="1" value={plan.days} onChange={e=>setP("days",e.target.value)}/></label>
-    </div>
-    <div className="forecastResults">
-     {metric("مبيعات / تحويلات متوقعة",forecast.purchases.toFixed(1),"Budget ÷ Target CPA")}
-     {metric("ميزانية يومية",money(forecast.dailyBudget),"Budget ÷ Days")}
-     {metric("تحويلات يومية",forecast.purchasesPerDay.toFixed(1),"Expected purchases ÷ Days")}
-     {metric("إيراد متوقع",money(forecast.revenue),"Expected purchases × AOV")}
-     {metric("ROAS متوقع",forecast.roas.toFixed(2)+"x","Expected revenue ÷ Budget")}
-     {metric("الإيراد بعد تكلفة الإعلان",money(forecast.revenueAfterAds),"Revenue − Ad Spend (قبل تكلفة المنتج والمصاريف)")}
-    </div>
-   </div>
   </section>
   <section className="panel verdict" dir="rtl"><h2>التشخيص السريع</h2><div className="diagnosis">
    <div><b>CTR</b><span className={m.ctr>=.015?"good":"warn"}>{m.ctr>=.015?"ممتاز — الإعلان يجذب النقرات بشكل جيد":"يحتاج اختبار كريتيفات جديدة"}</span></div>
