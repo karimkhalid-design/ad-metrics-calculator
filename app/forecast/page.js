@@ -24,12 +24,13 @@ export default function ForecastPage(){
  const metric=(name,val,sub="")=><div className="card"><span>{name}</span><b>{val}</b><small>{sub}</small></div>;
 
  return <div className="shell">
-  <header>
+  <header className="heroHeader">
    <div><div className="eyebrow">NEESH AGENCY TOOL</div><h1>Ad Results Forecast</h1><p>خطط لميزانية إعلانك واعرف النتائج المتوقعة بناءً على الـ Target CPA.</p></div>
+   <a className="forecastCta secondary" href="/">← تحليل حملة موجودة</a>
   </header>
   <nav className="topnav">
-   <a href="/">Ad Metrics</a>
-   <a className="active" href="/forecast">توقع نتائج الإعلان</a>
+   <a href="/">📊 تحليل نتائج الإعلان</a>
+   <a className="active" href="/forecast">🎯 توقع نتائج إعلان جديد</a>
   </nav>
   <main>
    <section className="panel forecast" dir="rtl">

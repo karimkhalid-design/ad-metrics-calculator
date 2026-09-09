@@ -18,3 +18,16 @@
 .topnav{display:flex;gap:8px;margin:0 0 18px;flex-wrap:wrap}
 .topnav a{text-decoration:none;color:#aeb4be;background:#15181e;border:1px solid #2b3038;padding:10px 14px;border-radius:10px;font-size:13px}
 .topnav a:hover,.topnav a.active{color:#fff;border-color:#565d68;background:#1b1f26}
+
+.heroHeader{display:flex;align-items:center;justify-content:space-between;gap:22px}
+.forecastCta{display:inline-flex;align-items:center;justify-content:center;text-decoration:none;font-weight:700;background:#fff;color:#0d0f12;padding:13px 17px;border-radius:12px;border:1px solid #fff;white-space:nowrap;transition:.2s}
+.forecastCta:hover{transform:translateY(-1px);opacity:.92}
+.forecastCta.secondary{background:#15181e;color:#fff;border-color:#343943}
+.topnav{padding:8px;background:#0f1115;border:1px solid #262b33;border-radius:14px}
+.topnav a{font-weight:700}
+@media(max-width:720px){
+ .heroHeader{align-items:flex-start;flex-direction:column}
+ .forecastCta{width:100%}
+ .topnav{display:grid;grid-template-columns:1fr}
+ .topnav a{text-align:center}
+}
