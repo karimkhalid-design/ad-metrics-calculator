@@ -3,7 +3,7 @@ import {useMemo,useState} from "react";
 
 const n=(v)=>Number(v)||0;
 const pct=(v)=>`${(v*100).toFixed(2)}%`;
-const money=(v)=>`$${v.toFixed(2)}`;
+const money=(v)=>`${v.toLocaleString("en-US",{minimumFractionDigits:2,maximumFractionDigits:2})} EGP`;
 
 export default function Home(){
  const [d,setD]=useState({spend:1000,impressions:50000,reach:30000,clicks:1000,lpv:700,leads:100,purchases:20,revenue:3000,profit:0});
@@ -45,11 +45,11 @@ export default function Home(){
     {metric("Break-even CPA",money(m.breakEvenCPA),"Max CPA before ad spend consumes revenue")}
    </div></div>
   </section>
-  <section className="panel verdict"><h2>Quick Diagnosis</h2><div className="diagnosis">
-   <div><b>CTR</b><span className={m.ctr>=.015?"good":"warn"}>{m.ctr>=.015?"Healthy":"Needs creative testing"}</span></div>
-   <div><b>CPA</b><span className={m.cpa<=m.breakEvenCPA*.7?"good":m.cpa<=m.breakEvenCPA?"warn":"bad"}>{m.cpa<=m.breakEvenCPA*.7?"Strong":m.cpa<=m.breakEvenCPA?"Watch it":"Unprofitable"}</span></div>
-   <div><b>ROAS</b><span className={m.roas>=3?"good":m.roas>=1?"warn":"bad"}>{m.roas>=3?"Strong":m.roas>=1?"Needs optimization":"Losing money"}</span></div>
+  <section className="panel verdict" dir="rtl"><h2>التشخيص السريع</h2><div className="diagnosis">
+   <div><b>CTR</b><span className={m.ctr>=.015?"good":"warn"}>{m.ctr>=.015?"ممتاز — الإعلان يجذب النقرات بشكل جيد":"يحتاج اختبار كريتيفات جديدة"}</span></div>
+   <div><b>CPA</b><span className={m.cpa<=m.breakEvenCPA*.7?"good":m.cpa<=m.breakEvenCPA?"warn":"bad"}>{m.cpa<=m.breakEvenCPA*.7?"قوي — تكلفة الاكتساب جيدة":m.cpa<=m.breakEvenCPA?"راقبه — قريب من الحد الأقصى":"غير مربح — تكلفة الاكتساب مرتفعة"}</span></div>
+   <div><b>ROAS</b><span className={m.roas>=3?"good":m.roas>=1?"warn":"bad"}>{m.roas>=3?"ممتاز — عائد قوي على الإنفاق الإعلاني":m.roas>=1?"يحتاج تحسين لزيادة العائد":"خسارة — الإيراد أقل من الإنفاق"}</span></div>
   </div></section>
-  <footer>Built for media buyers • No data leaves your browser</footer>
+  <footer><strong>MADE BY NEESH AGENCY</strong><br/><span>Built for media buyers • No data leaves your browser</span></footer>
  </main>
 }
